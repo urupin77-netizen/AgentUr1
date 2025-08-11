@@ -1,0 +1,16 @@
+server: { host: 0.0.0.0, port: 8000 }
+ui: { enabled: true, path: "/" }
+data:
+  root_dir: "C:\\Users\\aauru\\AppData\\Local\\private_gpt"
+  local_data_folder: "C:\\Users\\aauru\\AppData\\Local\\private_gpt\\data"
+
+nodestore: { database: qdrant }
+
+rag:
+  vector_store: qdrant
+  collection_name: "documents"   # ВАЖНО: валидное имя коллекции
+  rerank: { enabled: false }
+
+summarize: { enabled: true }
+ollama: { base_url: "http://localhost:11434" }
+

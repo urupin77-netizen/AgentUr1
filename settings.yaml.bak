@@ -1,0 +1,58 @@
+﻿server:
+  host: 0.0.0.0
+  port: 8000
+
+ui:
+  enabled: true
+  path: "/"
+
+data:
+  root_dir: "C:\\Users\\aauru\\AppData\\Local\\private_gpt"
+  local_data_folder: "C:\\Users\\aauru\\AppData\\Local\\private_gpt\\data"
+
+# Простое хранилище узлов (без БД)
+nodestore:
+  database: simple
+
+rag:
+  # ВАЖНО: используем простое in-memory/vector-store, чтобы не трогать Qdrant
+  vector_store: simple
+  rerank:
+    enabled: false
+
+summarize:
+  enabled: true
+
+ollama:
+  base_url: "http://localhost:11434"
+  llm_model: "llama3"
+  embedding_model: "nomic-embed-text"
+  request_timeout: 120
+  temperature: 0.0
+  embeddings:
+    batch_size: 32
+
+# Обязательные секции-плейсхолдеры для валидатора
+llamacpp:
+  llm_hf_repo_id: ""
+  llm_hf_model_file: ""
+
+huggingface:
+  embedding_hf_model_name: ""
+
+sagemaker:
+  llm_endpoint_name: ""
+  embedding_endpoint_name: ""
+
+openai:
+  api_key: ""
+  embedding_api_key: ""
+
+gemini:
+  api_key: ""
+
+azopenai:
+  api_key: ""
+  azure_endpoint: ""
+  embedding_deployment_name: ""
+  llm_deployment_name: ""

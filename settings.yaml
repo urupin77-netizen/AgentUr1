@@ -1,0 +1,48 @@
+# C:\AgentUr1\settings.yaml
+server:
+  host: 0.0.0.0
+  port: 8000
+
+ui:
+  enabled: true
+  path: "/"
+  api_base_url: "http://127.0.0.1:8000"  # Sync с port, для JS-client
+
+data:
+  root_dir: "C:\\Users\\aauru\\AppData\\Local\\private_gpt"
+  local_data_folder: "C:\\Users\\aauru\\AppData\\Local\\private_gpt\\data"
+
+nodestore:
+  database: simple  # без БД, исключаем qdrant
+
+rag:
+  vector_store: simple  # исключаем qdrant
+  rerank:
+    enabled: false
+  embeddings:
+    provider: huggingface
+    model_name: sentence-transformers/all-MiniLM-L6-v2
+    normalize: true
+    batch_size: 32
+
+summarize:
+  enabled: true
+
+ollama:
+  base_url: "http://localhost:11434"
+
+# Если у тебя в коде есть поддержка 'profile', оставим совместимость:
+profile: "default"
+profiles:
+  default:
+    rag:
+      vector_store: simple
+      embeddings:
+        provider: huggingface
+        model_name: sentence-transformers/all-MiniLM-L6-v2
+        normalize: true
+        batch_size: 32
+
+hypothesis:
+  auto_generate: true        # включить автогенерацию после чата
+  auto_threshold: 0.95       # если confidence рефлексии < 0.95 — генерить гипотезу (временно высокий порог для тестирования)

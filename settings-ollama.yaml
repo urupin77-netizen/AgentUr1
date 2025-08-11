@@ -1,0 +1,78 @@
+server:
+  env_name: ${APP_ENV:ollama}
+  port: 8000
+  host: 0.0.0.0
+
+llm:
+  mode: ollama
+  max_new_tokens: 512
+  context_window: 3900
+  temperature: 0.1     #The temperature of the model. Increasing the temperature will make the model answer more creatively. A value of 0.1 would be more factual. (Default: 0.1)
+  host: "http://localhost:11434"  # Явное указание для Windows compatibility
+
+embedding:
+  mode: ollama
+
+ollama:
+  llm_model: llama3.1
+  embedding_model: nomic-embed-text
+  api_base: http://localhost:11434
+  embedding_api_base: http://localhost:11434  # change if your embedding model runs on another ollama
+  keep_alive: 5m
+  tfs_z: 1.0              # Tail free sampling is used to reduce the impact of less probable tokens from the output. A higher value (e.g., 2.0) will reduce the impact more, while a value of 1.0 disables this setting.
+  top_k: 40               # Reduces the probability of generating nonsense. A higher value (e.g. 100) will give more diverse answers, while a lower value (e.g. 10) will be more conservative. (Default: 40)
+  top_p: 0.9              # Works together with top-k. A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9)
+  repeat_last_n: 64       # Sets how far back for the model to look back to prevent repetition. (Default: 64, 0 = disabled, -1 = num_ctx)
+  repeat_penalty: 1.2     # Sets how strongly to penalize repetitions. A higher value (e.g., 1.5) will penalize repetitions more strongly, while a lower value (e.g., 0.9) will be more lenient. (Default: 0.9)
+  request_timeout: 120.0  # Time elapsed until ollama times out the request. Default is 120s. Format is float.
+
+vectorstore:
+  database: chroma
+
+nodestore:
+  database: simple
+
+rag:
+  vector_store: chroma  # Используем chroma для ollama профиля
+  rerank:
+    enabled: false
+  embeddings:
+    provider: ollama
+    model_name: nomic-embed-text
+
+ui:
+  enabled: true
+  path: "/"
+  api_base_url: "http://127.0.0.1:8000"  # Sync с port
+
+# Минимальные настройки для других провайдеров
+llamacpp:
+  llm_hf_repo_id: "dummy"
+  llm_hf_model_file: "dummy"
+
+huggingface:
+  embedding_hf_model_name: "dummy"
+
+sagemaker:
+  llm_endpoint_name: "dummy"
+  embedding_endpoint_name: "dummy"
+
+openai:
+  api_key: "dummy"
+  model: "dummy"
+  embedding_api_key: "dummy"
+  embedding_model: "dummy"
+
+gemini:
+  api_key: "dummy"
+  model: "dummy"
+  embedding_model: "dummy"
+
+azopenai:
+  api_key: "dummy"
+  azure_endpoint: "dummy"
+  api_version: "dummy"
+  embedding_deployment_name: "dummy"
+  embedding_model: "dummy"
+  llm_deployment_name: "dummy"
+  llm_model: "dummy"
